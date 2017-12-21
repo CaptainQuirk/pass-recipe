@@ -1,0 +1,23 @@
+#!/bin/bash
+
+PASS_REPO_FILE=$HOME/.pass-repository
+LOCAL_CONFIGURATION=$HOME/.local/configuration
+
+mkdir -p $LOCAL_CONFIGURATION/pass
+
+sudo apt-get install pwgen xclip
+
+if [ -f $PASS_REPO_FILE ]; then
+    source $PASS_REPO_FILE
+    git clone $PASS_REPO_URL $HOME/.password-store
+fi
+
+brew install pass
+
+if [ -d $LOCAL_CONFIGURATION/pass/keys ]; then
+    for FOLDER in $LOCAL_CONFIGURATION/pass/keys/*; do
+        gpg --import $LOCAL_CONFIGURATION/pass/keys/$FOLDER/public_key.gpg
+        gpg --allow-secret-key-import --import $LOCAL_CONFIGURATION/pass/keys/$FOLDER/secret_key.gpg
+
+    done
+fi
