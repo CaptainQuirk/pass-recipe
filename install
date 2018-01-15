@@ -2,6 +2,7 @@
 
 PASS_REPO_FILE=$HOME/.pass-repository
 LOCAL_CONFIGURATION=$HOME/.local/configuration
+PASS_RECIPE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 mkdir -p $LOCAL_CONFIGURATION/pass
 
@@ -18,6 +19,7 @@ if [ -d $LOCAL_CONFIGURATION/pass/keys ]; then
     for FOLDER in $LOCAL_CONFIGURATION/pass/keys/*; do
         gpg --import $LOCAL_CONFIGURATION/pass/keys/$FOLDER/public_key.gpg
         gpg --allow-secret-key-import --import $LOCAL_CONFIGURATION/pass/keys/$FOLDER/secret_key.gpg
-
     done
 fi
+
+sudo cp --update $PASS_RECIPE_DIR/files/passmenu /usr/local/bin/passmenu
