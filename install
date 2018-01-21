@@ -14,6 +14,7 @@ fi
 
 brew install pass
 
+# TODO call a function to import gpg key
 if [ -d $LOCAL_CONFIGURATION/pass/keys ]; then
     for FOLDER in $LOCAL_CONFIGURATION/pass/keys/*; do
         gpg --import $LOCAL_CONFIGURATION/pass/keys/$FOLDER/public_key.gpg
