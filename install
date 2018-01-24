@@ -19,6 +19,7 @@ if [ -d $LOCAL_CONFIGURATION/pass/keys ]; then
     for FOLDER in $LOCAL_CONFIGURATION/pass/keys/*; do
         gpg --import $LOCAL_CONFIGURATION/pass/keys/$FOLDER/public_key.gpg
         gpg --allow-secret-key-import --import $LOCAL_CONFIGURATION/pass/keys/$FOLDER/secret_key.gpg
+        # TODO add trust command
     done
 fi
 
